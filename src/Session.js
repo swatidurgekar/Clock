@@ -1,16 +1,26 @@
-import { useState } from "react";
 import classes from "./Session.module.css";
 import { ImArrowDown2, ImArrowUp2 } from "react-icons/im";
+import { useDispatch, useSelector } from "react-redux";
+import { lengthActions } from "./Store/Lengths";
 
-const Session = () => {
-  const [sessionLength, setSessionLength] = useState(25);
+const Session = ({ play }) => {
+  const sessionLength = useSelector((state) => state.lengths.sessionLength);
+  const dispatch = useDispatch();
 
   const increase = () => {
-    if (sessionLength < 60) setSessionLength((prevLength) => prevLength + 1);
+    if (!play) {
+      if (sessionLength < 60) {
+        dispatch(lengthActions.increaseSession());
+      }
+    }
   };
 
   const decrease = () => {
-    if (sessionLength > 1) setSessionLength((prevLength) => prevLength - 1);
+    if (!play) {
+      if (sessionLength > 1) {
+        dispatch(lengthActions.decreaseSession());
+      }
+    }
   };
 
   return (

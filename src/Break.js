@@ -1,16 +1,26 @@
-import { useState } from "react";
 import classes from "./Break.module.css";
 import { ImArrowUp2, ImArrowDown2 } from "react-icons/im";
+import { useSelector, useDispatch } from "react-redux";
+import { lengthActions } from "./Store/Lengths";
 
-const Break = () => {
-  const [breakLength, setBreakLength] = useState(5);
+const Break = ({ play }) => {
+  const dispatch = useDispatch();
+  const breakLength = useSelector((state) => state.lengths.breakLength);
 
   const increase = () => {
-    if (breakLength < 60) setBreakLength((prevLength) => prevLength + 1);
+    if (!play) {
+      if (breakLength < 60) {
+        dispatch(lengthActions.increaseBreak());
+      }
+    }
   };
 
   const decrease = () => {
-    if (breakLength > 1) setBreakLength((prevLength) => prevLength - 1);
+    if (!play) {
+      if (breakLength > 1) {
+        dispatch(lengthActions.decreaseBreak());
+      }
+    }
   };
 
   return (
