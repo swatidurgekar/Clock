@@ -1,0 +1,14 @@
+.title {
+  font-size: 30px;
+  font-weight: 300;
+}
+.arrow {
+  margin: 15px;
+}
+.arrow:hover {
+  cursor: pointer;
+}
+.sessionlength {
+  font-size: 30px;
+  font-weight: bold;
+}
